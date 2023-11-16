@@ -33,4 +33,9 @@ public class VeiculoDAO {
     public void setRenavam(String renavam) {
         this.renavam = renavam;
     }
+
+    @Override
+    public String toString() {
+        return "Modelo: " + modelo + ", Placa: " + placa;
+    }
 }

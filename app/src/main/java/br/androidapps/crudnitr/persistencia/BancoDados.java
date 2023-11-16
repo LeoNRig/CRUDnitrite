@@ -40,6 +40,11 @@ public class BancoDados {
         return cursor.toList();
     }
 
+    public List<ClienteDAO> listarCliente(){
+        Cursor<ClienteDAO> cursor = clienteRepository.find();
+        return cursor.toList();
+    }
+
 
 
     public void closeDatabase() {
