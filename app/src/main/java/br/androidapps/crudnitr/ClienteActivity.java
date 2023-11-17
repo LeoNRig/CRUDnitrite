@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.androidapps.crudnitr.model.ClienteDAO;
+import br.androidapps.crudnitr.model.Cliente;
 import br.androidapps.crudnitr.persistencia.BancoDados;
 
 public class ClienteActivity extends AppCompatActivity {
@@ -15,7 +15,6 @@ public class ClienteActivity extends AppCompatActivity {
     private EditText cpfEditText;
     private Button salvarButton;
 
-    private BancoDados databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +25,17 @@ public class ClienteActivity extends AppCompatActivity {
         cpfEditText = findViewById(R.id.cpfEditText);
         salvarButton = findViewById(R.id.salvarButton);
 
-        databaseHelper = new BancoDados(this);
-
         salvarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String nome = nomeEditText.getText().toString();
                 String cpf = cpfEditText.getText().toString();
 
-                ClienteDAO cliente = new ClienteDAO();
+                Cliente cliente = new Cliente();
                 cliente.setNome(nome);
                 cliente.setCpf(cpf);
 
-                databaseHelper.salvarCliente(cliente);
+                BancoDados.salvarCliente(cliente);
 
                 nomeEditText.setText("");
                 cpfEditText.setText("");
@@ -46,11 +43,5 @@ public class ClienteActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        databaseHelper.closeDatabase();
     }
 }

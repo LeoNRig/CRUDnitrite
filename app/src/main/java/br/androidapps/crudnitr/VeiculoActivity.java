@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import br.androidapps.crudnitr.model.VeiculoDAO;
+import br.androidapps.crudnitr.model.Veiculo;
 import br.androidapps.crudnitr.persistencia.BancoDados;
 
 public class VeiculoActivity extends AppCompatActivity {
@@ -15,8 +15,6 @@ public class VeiculoActivity extends AppCompatActivity {
     private EditText placaEditText;
     private EditText renavamEditText;
     private Button salvarButton;
-
-    private BancoDados databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +26,6 @@ public class VeiculoActivity extends AppCompatActivity {
         salvarButton = findViewById(R.id.salvarButton);
         renavamEditText = findViewById(R.id.renavamEditText);
 
-        databaseHelper = new BancoDados(this);
-
         salvarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,12 +33,12 @@ public class VeiculoActivity extends AppCompatActivity {
                 String placa = placaEditText.getText().toString();
                 String renavam = renavamEditText.getText().toString();
 
-                VeiculoDAO veiculo = new VeiculoDAO();
+                Veiculo veiculo = new Veiculo();
                 veiculo.setModelo(modelo);
                 veiculo.setPlaca(placa);
                 veiculo.setRenavam(renavam);
 
-                databaseHelper.salvarVeiculo(veiculo);
+                BancoDados.salvarVeiculo(veiculo);
 
                 modeloEditText.setText("");
                 placaEditText.setText("");
@@ -51,12 +47,6 @@ public class VeiculoActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        databaseHelper.closeDatabase();
     }
 }
 

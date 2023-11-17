@@ -72,11 +72,14 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
 
-                <ListView
-                    android:id="@+id/listViewVeiculos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"/>
+                    <ListView
+                        android:id="@+id/listViewVeiculos"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="16dp"/>
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -84,12 +87,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
-
                 <ListView
                     android:id="@+id/listViewClientes"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:layout_marginTop="16dp"/>
+
 
             </LinearLayout>
         </LinearLayout>

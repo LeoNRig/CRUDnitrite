@@ -1,10 +1,15 @@
 package br.androidapps.crudnitr.model;
 
-public class ClienteDAO {
+import org.dizitart.no2.NitriteId;
+import org.dizitart.no2.objects.Id;
+
+public class Cliente {
+    @Id
+    NitriteId id;
     private String nome;
     private String cpf;
 
-    public ClienteDAO() {
+    public Cliente() {
         this.nome = nome;
         this.cpf = cpf;
     }
@@ -21,6 +26,14 @@ public class ClienteDAO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public void setId(NitriteId id) {
+        this.id = id;
+    }
+
+    public NitriteId getId() {
+        return id;
     }
 
     @Override

@@ -9,45 +9,45 @@ import org.dizitart.no2.objects.ObjectRepository;
 
 import java.util.List;
 
-import br.androidapps.crudnitr.model.ClienteDAO;
-import br.androidapps.crudnitr.model.VeiculoDAO;
+import br.androidapps.crudnitr.model.Cliente;
+import br.androidapps.crudnitr.model.Veiculo;
 
 public class BancoDados {
-    private Nitrite nitrite;
-    private ObjectRepository<VeiculoDAO> veiculoRepository;
-    private ObjectRepository<ClienteDAO> clienteRepository;
+    public static Nitrite nitrite;
+    public static ObjectRepository<Veiculo> veiculoRepository;
+    public static ObjectRepository<Cliente> clienteRepository;
 
-    public BancoDados(Context context) {
+    public static void iniciaBancoDados(Context context) {
         nitrite = Nitrite.builder()
                 .filePath(context.getFilesDir() + "/mydatabase.db")
                 .openOrCreate();
-        veiculoRepository = nitrite.getRepository(VeiculoDAO.class);
-        clienteRepository = nitrite.getRepository(ClienteDAO.class);
+        veiculoRepository = nitrite.getRepository(Veiculo.class);
+        clienteRepository = nitrite.getRepository(Cliente.class);
     }
-    public void salvarVeiculo(VeiculoDAO veiculo) {
+    public static void salvarVeiculo(Veiculo veiculo) {
         veiculoRepository.insert(veiculo);
         Log.d("BancoDados", "Veículo salvo: Modelo - " + veiculo.getModelo() + ", Placa - " + veiculo.getPlaca()+", Renavam - " + veiculo.getRenavam());
     }
-    public void salvarCliente(ClienteDAO cliente) {
+    public static void salvarCliente(Cliente cliente) {
         clienteRepository.insert(cliente);
         Log.d("BancoDados", "Cliente salvo: Modelo - " + cliente.getNome() + ", Placa - " + cliente.getCpf());
 
     }
 
 
-    public List<VeiculoDAO> listarVeiculo(){
-        Cursor<VeiculoDAO> cursor = veiculoRepository.find();
+    public static List<Veiculo> listarVeiculo(){
+        Cursor<Veiculo> cursor = veiculoRepository.find();
         return cursor.toList();
     }
 
-    public List<ClienteDAO> listarCliente(){
-        Cursor<ClienteDAO> cursor = clienteRepository.find();
+    public static List<Cliente> listarCliente(){
+        Cursor<Cliente> cursor = clienteRepository.find();
         return cursor.toList();
     }
 
 
 
-    public void closeDatabase() {
+    public static void closeDatabase() {
         nitrite.close();
     }
 

@@ -1,14 +1,24 @@
 package br.androidapps.crudnitr.model;
 
-public class VeiculoDAO {
+import androidx.annotation.NonNull;
+
+import org.dizitart.no2.NitriteId;
+import org.dizitart.no2.objects.Id;
+
+public class Veiculo {
+
+    @Id
+    NitriteId id;
     private String modelo;
 
     private String placa;
 
     private String renavam;
 
+    private Cliente cliente;
 
-    public VeiculoDAO() {
+
+    public Veiculo() {
         this.modelo = modelo;
         this.placa = placa;
         this.renavam = renavam;
@@ -34,8 +44,25 @@ public class VeiculoDAO {
         this.renavam = renavam;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Modelo: " + modelo + ", Placa: " + placa;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setId(NitriteId id) {
+        this.id = id;
+    }
+
+    public NitriteId getId() {
+        return id;
     }
 }
