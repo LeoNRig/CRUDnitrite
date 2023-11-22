@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import org.dizitart.no2.Nitrite;
+import org.dizitart.no2.NitriteId;
 import org.dizitart.no2.objects.Cursor;
 import org.dizitart.no2.objects.ObjectRepository;
 
@@ -45,6 +46,17 @@ public class BancoDados {
         return cursor.toList();
     }
 
+    public static void excluirVeiculo(NitriteId veiculoId) {
+        Veiculo veiculo = veiculoRepository.getById(veiculoId);
+        veiculoRepository.remove(veiculo);
+        Log.d("BancoDados", "Veículo excluído: ID - " + veiculoId);
+    }
+
+    public static void excluirCliente(NitriteId clienteId) {
+        Cliente cliente = clienteRepository.getById(clienteId);
+        clienteRepository.remove(cliente);
+        Log.d("BancoDados", "Cliente excluído: ID - " + clienteId);
+    }
 
 
     public static void closeDatabase() {

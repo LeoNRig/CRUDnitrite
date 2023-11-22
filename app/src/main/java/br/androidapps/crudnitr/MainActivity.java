@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.List;
@@ -44,7 +48,64 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        listaVeiculo = findViewById(R.id.listViewVeiculos);
+        registerForContextMenu(listaVeiculo);
+
+        listaCliente= findViewById(R.id.listViewClientes);
+        registerForContextMenu(listaCliente);
+
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_editar) {
+
+            return true;
+
+        } else if (itemId == R.id.menu_excluir) {
+
+            if (info.targetView.getParent() == listaVeiculo) {
+
+                Veiculo veiculoExcluir = veiculoAdpter.getItem(info.position);
+
+                if (veiculoExcluir != null) {
+                    BancoDados.excluirVeiculo(veiculoExcluir.getId());
+
+                    veiculoAdpter.remove(veiculoExcluir);
+                    veiculoAdpter.notifyDataSetChanged();
+
+                } else {
+                    Log.e("ExcluirVeiculo", "Veículo a ser excluído é nulo");
+                }
+            } else if (info.targetView.getParent() == listaCliente) {
+
+                Cliente clienteExcluir = clienteAdpter.getItem(info.position);
+
+                if (clienteExcluir != null) {
+                    BancoDados.excluirCliente(clienteExcluir.getId());
+
+                    clienteAdpter.remove(clienteExcluir);
+                    clienteAdpter.notifyDataSetChanged();
+
+                } else {
+                    Log.e("ExcluirCliente", "Cliente a ser excluído é nulo");
+                }
+            }
+
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+
 
     @Override
     protected void onDestroy() {
@@ -69,4 +130,5 @@ public class MainActivity extends AppCompatActivity {
         clienteAdpter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, clientes);
         listaCliente.setAdapter(clienteAdpter);
     }
+
 }

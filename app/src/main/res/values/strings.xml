@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CRUDnitr</string>
+    <string name="menu_editar">Editar</string>
+    <string name="menu_excluir">Excluir</string>
 </resources>
