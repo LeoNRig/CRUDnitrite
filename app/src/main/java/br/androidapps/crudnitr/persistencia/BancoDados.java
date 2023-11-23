@@ -5,8 +5,11 @@ import android.util.Log;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteId;
+import org.dizitart.no2.filters.Filters;
 import org.dizitart.no2.objects.Cursor;
+import org.dizitart.no2.objects.ObjectFilter;
 import org.dizitart.no2.objects.ObjectRepository;
+import org.dizitart.no2.objects.filters.ObjectFilters;
 
 import java.util.List;
 
@@ -26,8 +29,13 @@ public class BancoDados {
         clienteRepository = nitrite.getRepository(Cliente.class);
     }
     public static void salvarVeiculo(Veiculo veiculo) {
-        veiculoRepository.insert(veiculo);
-        Log.d("BancoDados", "Veículo salvo: Modelo - " + veiculo.getModelo() + ", Placa - " + veiculo.getPlaca()+", Renavam - " + veiculo.getRenavam());
+        if (veiculo.getId() != null) {
+            veiculoRepository.update(veiculo);
+            Log.d("BancoDados", "Veículo atualizado: ID - " + veiculo.getId());
+        } else {
+            veiculoRepository.insert(veiculo);
+            Log.d("BancoDados", "Veículo salvo: Modelo - " + veiculo.getModelo() + ", Placa - " + veiculo.getPlaca()+", Renavam - " + veiculo.getRenavam());
+        }
     }
     public static void salvarCliente(Cliente cliente) {
         clienteRepository.insert(cliente);
@@ -46,6 +54,14 @@ public class BancoDados {
         return cursor.toList();
     }
 
+    public static void editarVeiculo(NitriteId veiculoId) {
+        Veiculo veiculo = veiculoRepository.getById(veiculoId);
+    }
+
+    public static void editarCliente(NitriteId clienteId) {
+        Cliente cliente = clienteRepository.getById(clienteId);
+    }
+
     public static void excluirVeiculo(NitriteId veiculoId) {
         Veiculo veiculo = veiculoRepository.getById(veiculoId);
         veiculoRepository.remove(veiculo);
@@ -56,6 +72,19 @@ public class BancoDados {
         Cliente cliente = clienteRepository.getById(clienteId);
         clienteRepository.remove(cliente);
         Log.d("BancoDados", "Cliente excluído: ID - " + clienteId);
+    }
+
+    public static Veiculo getVeiculoPorId(String veiculoId) {
+        veiculoId = veiculoId.replaceAll("[^\\d]", "");
+        NitriteId nitriteId = NitriteId.createId(Long.valueOf(String.valueOf(veiculoId)));
+        Cursor<Veiculo> cursor = veiculoRepository.find(ObjectFilters.eq("_id", nitriteId));
+        List<Veiculo> veiculos = cursor.toList();
+
+        if (!veiculos.isEmpty()) {
+            return veiculos.get(0);
+        } else {
+            return null;
+        }
     }
 
 

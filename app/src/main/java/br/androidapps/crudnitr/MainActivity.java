@@ -67,6 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
         int itemId = item.getItemId();
         if (itemId == R.id.menu_editar) {
+            if (info.targetView.getParent() == listaVeiculo) {
+                Veiculo veiculoEditar = veiculoAdpter.getItem(info.position);
+
+                if (veiculoEditar != null) {
+                    BancoDados.editarVeiculo(veiculoEditar.getId());
+                    Intent editarIntent = new Intent(MainActivity.this, VeiculoActivity.class);
+                    editarIntent.putExtra("veiculoEditarId", veiculoEditar.getId().toString());
+                    startActivity(editarIntent);
+                } else {
+                    Log.e("EditarVeiculo", "Veículo a ser editado é nulo");
+                }
+            }
 
             return true;
 
