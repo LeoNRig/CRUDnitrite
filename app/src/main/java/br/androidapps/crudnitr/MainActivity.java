@@ -78,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.e("EditarVeiculo", "Veículo a ser editado é nulo");
                 }
+            } else if(info.targetView.getParent() == listaCliente) {
+                Cliente clienteEditar = clienteAdpter.getItem(info.position);
+
+                if (clienteEditar != null) {
+                    BancoDados.editarCliente(clienteEditar.getId());
+                    Intent editarIntent = new Intent(MainActivity.this, ClienteActivity.class);
+                    editarIntent.putExtra("clienteEditarId", clienteEditar.getId().toString());
+                    startActivity(editarIntent);
+                } else {
+                    Log.e("EditarCliente", "Cliente a ser editado é nulo");
+                }
             }
 
             return true;

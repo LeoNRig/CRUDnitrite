@@ -38,9 +38,14 @@ public class BancoDados {
         }
     }
     public static void salvarCliente(Cliente cliente) {
-        clienteRepository.insert(cliente);
-        Log.d("BancoDados", "Cliente salvo: Modelo - " + cliente.getNome() + ", Placa - " + cliente.getCpf());
+        if(cliente.getId() != null) {
+            clienteRepository.update(cliente);
+            Log.d("BancoDados", "Veículo atualizado: ID - " + cliente.getId());
+        } else {
+            clienteRepository.insert(cliente);
+            Log.d("BancoDados", "Cliente salvo: Modelo - " + cliente.getNome() + ", Placa - " + cliente.getCpf());
 
+        }
     }
 
 
@@ -82,6 +87,19 @@ public class BancoDados {
 
         if (!veiculos.isEmpty()) {
             return veiculos.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public static Cliente getClientePorId(String clienteId) {
+        clienteId = clienteId.replaceAll("[^\\d]", "");
+        NitriteId nitriteId = NitriteId.createId(Long.valueOf(String.valueOf(clienteId)));
+        Cursor<Cliente> cursor = clienteRepository.find(ObjectFilters.eq("_id", nitriteId));
+        List<Cliente> clientes = cursor.toList();
+
+        if (!clientes.isEmpty()) {
+            return clientes.get(0);
         } else {
             return null;
         }

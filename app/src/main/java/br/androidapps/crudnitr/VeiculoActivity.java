@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.UUID;
 
 import br.androidapps.crudnitr.model.Veiculo;
 import br.androidapps.crudnitr.persistencia.BancoDados;
