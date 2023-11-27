@@ -15,8 +15,11 @@ import br.androidapps.crudnitr.persistencia.BancoDados;
 public class ClienteActivity extends AppCompatActivity {
     private EditText nomeEditText;
     private EditText cpfEditText;
+    private EditText emailEditText;
+    private EditText telefoneEditText;
     private Cliente clienteEditar;
     private Button salvarButton;
+    private Button cancelarButton;
 
 
     @Override
@@ -26,7 +29,10 @@ public class ClienteActivity extends AppCompatActivity {
 
         nomeEditText = findViewById(R.id.nomeEditText);
         cpfEditText = findViewById(R.id.cpfEditText);
+        emailEditText = findViewById(R.id.emailEditText);
+        telefoneEditText = findViewById(R.id.telefoneEditText);
         salvarButton = findViewById(R.id.salvarButton);
+        cancelarButton = findViewById(R.id.cancelarButton);
 
         Intent intent = getIntent();
         String clienteEditarId = intent.getStringExtra("clienteEditarId");
@@ -36,6 +42,9 @@ public class ClienteActivity extends AppCompatActivity {
             clienteEditar = BancoDados.getClientePorId(clienteEditarId);
             nomeEditText.setText(clienteEditar.getNome());
             cpfEditText.setText(clienteEditar.getCpf());
+            emailEditText.setText(clienteEditar.getEmail());
+            telefoneEditText.setText(clienteEditar.getTelefone());
+
         } else {
             clienteEditar = null;
         }
@@ -49,15 +58,32 @@ public class ClienteActivity extends AppCompatActivity {
 
                 clienteEditar.setNome(nomeEditText.getText().toString());
                 clienteEditar.setCpf(cpfEditText.getText().toString());
+                clienteEditar.setEmail(emailEditText.getText().toString());
+                clienteEditar.setTelefone(telefoneEditText.getText().toString());
 
 
                 BancoDados.salvarCliente(clienteEditar);
 
                 nomeEditText.setText("");
                 cpfEditText.setText("");
+                emailEditText.setText("");
+                clienteEditar.setTelefone("");
 
                 finish();
             }
         });
+        cancelarButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                nomeEditText.setText("");
+                cpfEditText.setText("");
+                emailEditText.setText("");
+                telefoneEditText.setText("");
+
+                finish();
+            }
+        });
+
     }
 }

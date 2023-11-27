@@ -40,10 +40,10 @@ public class BancoDados {
     public static void salvarCliente(Cliente cliente) {
         if(cliente.getId() != null) {
             clienteRepository.update(cliente);
-            Log.d("BancoDados", "Veículo atualizado: ID - " + cliente.getId());
+            Log.d("BancoDados", "Cliente atualizado: ID - " + cliente.getId());
         } else {
             clienteRepository.insert(cliente);
-            Log.d("BancoDados", "Cliente salvo: Modelo - " + cliente.getNome() + ", Placa - " + cliente.getCpf());
+            Log.d("BancoDados", "Cliente salvo: Nome - " + cliente.getNome() + ", Cpf - " + cliente.getCpf());
 
         }
     }

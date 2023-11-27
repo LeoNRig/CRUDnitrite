@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.context_menu, menu);
+
     }
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -72,13 +73,16 @@ public class MainActivity extends AppCompatActivity {
 
                 if (veiculoEditar != null) {
                     BancoDados.editarVeiculo(veiculoEditar.getId());
+
                     Intent editarIntent = new Intent(MainActivity.this, VeiculoActivity.class);
                     editarIntent.putExtra("veiculoEditarId", veiculoEditar.getId().toString());
                     startActivity(editarIntent);
                 } else {
                     Log.e("EditarVeiculo", "Veículo a ser editado é nulo");
                 }
+
             } else if(info.targetView.getParent() == listaCliente) {
+
                 Cliente clienteEditar = clienteAdpter.getItem(info.position);
 
                 if (clienteEditar != null) {
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
+
 
 
 

@@ -15,6 +15,8 @@ public class Veiculo {
 
     private String renavam;
 
+    private String cor;
+
     private Cliente cliente;
 
 
@@ -22,6 +24,7 @@ public class Veiculo {
         this.modelo = modelo;
         this.placa = placa;
         this.renavam = renavam;
+        this.cor = cor;
     }
     public String getModelo() {
         return modelo;
@@ -44,6 +47,12 @@ public class Veiculo {
         this.renavam = renavam;
     }
 
+    public String getCor() {
+        return cor;
+    }
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
     @NonNull
     @Override
     public String toString() {
