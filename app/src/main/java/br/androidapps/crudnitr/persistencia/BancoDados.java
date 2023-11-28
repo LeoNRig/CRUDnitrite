@@ -34,8 +34,10 @@ public class BancoDados {
             Log.d("BancoDados", "Veículo atualizado: ID - " + veiculo.getId());
         } else {
             veiculoRepository.insert(veiculo);
-            Log.d("BancoDados", "Veículo salvo: Modelo - " + veiculo.getModelo() + ", Placa - " + veiculo.getPlaca()+", Renavam - " + veiculo.getRenavam());
+            Log.d("BancoDados", "Veículo salvo: Modelo - " + veiculo.getModelo() + ", Placa - " + veiculo.getPlaca()+", Renavam - " + veiculo.getRenavam()+ "" + veiculo.getCliente());
         }
+        Log.d("BancoDados", "Cliente associado: " + veiculo.getCliente());
+
     }
     public static void salvarCliente(Cliente cliente) {
         if(cliente.getId() != null) {

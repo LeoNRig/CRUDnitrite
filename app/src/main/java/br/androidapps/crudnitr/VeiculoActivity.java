@@ -70,6 +70,7 @@ public class VeiculoActivity extends AppCompatActivity {
             veiculoEditar = null;
         }
 
+
         salvarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,10 +119,10 @@ public class VeiculoActivity extends AppCompatActivity {
             }
         });
 
-    }
 
+    }
     @Override
-        public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+    public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
 
         if (v == btnVincular) {
@@ -167,6 +168,7 @@ public class VeiculoActivity extends AppCompatActivity {
 
         return super.onContextItemSelected(item);
     }
+
 
 
 }
