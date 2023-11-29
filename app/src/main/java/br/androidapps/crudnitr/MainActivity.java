@@ -1,5 +1,6 @@
 package br.androidapps.crudnitr;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listaVeiculo;
 
     private ListView listaCliente;
+
     private ArrayAdapter<Veiculo> veiculoAdpter;
     private ArrayAdapter<Cliente> clienteAdpter;
 
@@ -32,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BancoDados.iniciaBancoDados(this);
-        
+
+
+
         findViewById(R.id.btnVeiculo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, VeiculoActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -131,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
-
-
-
 
     @Override
     protected void onDestroy() {

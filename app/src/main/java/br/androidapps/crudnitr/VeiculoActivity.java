@@ -14,8 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import org.dizitart.no2.NitriteId;
 
 import java.util.List;
 
@@ -93,6 +96,8 @@ public class VeiculoActivity extends AppCompatActivity {
                 corEditText.setText("");
                 clienteEditText.setText("");
 
+                setResult(RESULT_OK);
+
 
                 finish();
             }
@@ -130,20 +135,19 @@ public class VeiculoActivity extends AppCompatActivity {
 
             List<Cliente> clientes = BancoDados.listarCliente();
             for (Cliente cliente : clientes) {
-                int clienteId = cliente.getId().getIdValue().intValue();
-                menu.add(Menu.NONE, clienteId, Menu.NONE, cliente.getNome());
+                long clienteId = cliente.getId().getIdValue();
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, clienteId + "]]" + cliente.getNome());
             }
         }
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
-        int itemId = item.getItemId();
+        Long itemId = Long.parseLong(("" + item.getTitle()).split("]]")[0]);
 
-        if (itemId == R.id.menu_vincular_cliente) {
-            Cliente clienteSelecionado = clienteAdpter.getItem(info.position);
+            Cliente clienteSelecionado = BancoDados.clienteRepository.getById(NitriteId.createId(itemId));
 
             if (clienteSelecionado != null) {
                 if (veiculoEditar != null) {
@@ -156,6 +160,7 @@ public class VeiculoActivity extends AppCompatActivity {
                     BancoDados.salvarVeiculo(veiculoEditar);
 
                     veiculoAdpter.notifyDataSetChanged();
+                    finish();
                     Log.e("VincularCliente", "Veículo vinculado " + veiculoEditar.getCliente());
                 } else {
                     Log.e("VincularCliente", "Veículo a ser vinculado é nulo");
@@ -163,8 +168,6 @@ public class VeiculoActivity extends AppCompatActivity {
             }   else {
                 Log.e("VincularCliente", "Cliente selecionado é nulo");
             }
-            return true;
-        }
 
         return super.onContextItemSelected(item);
     }

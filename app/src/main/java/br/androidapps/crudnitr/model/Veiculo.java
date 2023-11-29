@@ -56,7 +56,8 @@ public class Veiculo {
     @NonNull
     @Override
     public String toString() {
-        return "Modelo: " + modelo + ", Placa: " + placa;
+        String clienteInfo = (cliente != null) ? ", Cliente: " + cliente.getNome() : "";
+        return "Modelo: " + modelo + ", Placa: " + placa + ""  + clienteInfo;
     }
 
     public Cliente getCliente() {
