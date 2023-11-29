@@ -45,14 +45,6 @@
         android:textSize="30dp"
         android:layout_marginTop="8dp"
         android:hint="Cor" />
-    <EditText
-        android:id="@+id/clienteEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/corEditText"
-        android:textSize="30dp"
-        android:layout_marginTop="8dp"
-        android:hint="Cliente" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,8 +54,10 @@
         android:id="@+id/salvarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/renavamEditText"
+        android:layout_below="@id/corEditText"
         android:layout_weight="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:backgroundTint="@color/ciano"
         android:layout_marginTop="16dp"
         android:text="Salvar" />
@@ -72,8 +66,10 @@
             android:id="@+id/cancelarButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/renavamEditText"
+            android:layout_below="@id/corEditText"
             android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:backgroundTint="@color/ciano"
             android:layout_marginTop="16dp"
             android:text="Cancelar" />

@@ -31,7 +31,6 @@ public class VeiculoActivity extends AppCompatActivity {
     private EditText placaEditText;
     private EditText renavamEditText;
     private EditText corEditText;
-    private EditText clienteEditText;
     private Button btnVincular;
     private Button salvarButton;
     private Button cancelarButton;
@@ -56,7 +55,6 @@ public class VeiculoActivity extends AppCompatActivity {
         btnVincular = findViewById(R.id.btnVincular);
         renavamEditText = findViewById(R.id.renavamEditText);
         corEditText = findViewById(R.id.corEditText);
-        clienteEditText = findViewById(R.id.clienteEditText);
 
         Intent intent = getIntent();
         String veiculoEditarId = intent.getStringExtra("veiculoEditarId");
@@ -94,9 +92,6 @@ public class VeiculoActivity extends AppCompatActivity {
                 placaEditText.setText("");
                 renavamEditText.setText("");
                 corEditText.setText("");
-                clienteEditText.setText("");
-
-                setResult(RESULT_OK);
 
 
                 finish();
@@ -110,7 +105,6 @@ public class VeiculoActivity extends AppCompatActivity {
                 placaEditText.setText("");
                 renavamEditText.setText("");
                 corEditText.setText("");
-                clienteEditText.setText("");
 
                 finish();
             }
@@ -123,7 +117,6 @@ public class VeiculoActivity extends AppCompatActivity {
                 unregisterForContextMenu(btnVincular);
             }
         });
-
 
     }
     @Override
@@ -154,8 +147,6 @@ public class VeiculoActivity extends AppCompatActivity {
 
                     veiculoEditar.setCliente(clienteSelecionado);
                     Log.d("VincularCliente", "Cliente vinculado: " + veiculoEditar.getCliente().getNome());
-
-                    clienteEditText.setText(clienteSelecionado.getNome());
 
                     BancoDados.salvarVeiculo(veiculoEditar);
 
